@@ -38,13 +38,12 @@ void getMacAddr(char *dev) {
 
 int sendArp(pcap_t* handle, uint32_t sip, uint32_t tip, uint16_t type){
 	EthArpPacket packet;
-
-	packet.arp_.tip_ = htonl(Ip(tip));
+	packet.arp_.tip_ = htonl(Ip(tip));	
 	packet.eth_.type_ = htons(EthHdr::Arp);
-  	packet.arp_.hrd_ = htons(ArpHdr::ETHER);
-    packet.arp_.pro_ = htons(EthHdr::Ip4);
-    packet.arp_.hln_ = 6;
-    packet.arp_.pln_ = 4;
+	packet.arp_.hrd_ = htons(ArpHdr::ETHER);
+	packet.arp_.pro_ = htons(EthHdr::Ip4);
+	packet.arp_.hln_ = 6;
+	packet.arp_.pln_ = 4;
 
 	if(type == htons(ArpHdr::Request)){
 		packet.eth_.dmac_= Mac("FF:FF:FF:FF:FF:FF");	
